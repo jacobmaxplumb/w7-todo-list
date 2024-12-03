@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Test } from "./Test";
 
 function App() {
+  const [title, setTitle] = useState('Jacob Plumb');
+
+  let number = 10;
+
+  let randomFunction = () => {
+    console.log('random function was called');
+  }
+
+  const changeTitle = () => {
+    setTitle('something else');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>{title}</h1>
+      <button onClick={changeTitle}>Change</button>
+      <Test myPropOne="hello" myPropTwo={randomFunction} />
     </div>
   );
 }
