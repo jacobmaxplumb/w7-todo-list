@@ -1,24 +1,29 @@
 import { useState } from "react";
-import { Test } from "./Test";
 
 function App() {
-  const [title, setTitle] = useState('Jacob Plumb');
+  const [todos, setTodos] = useState([]);
+  const [text, setText] = useState("");
 
-  let number = 10;
+  const handleInputChange = (e) => {
+    setText(e.target.value);
+  };
 
-  let randomFunction = () => {
-    console.log('random function was called');
+  const addTodoItem = () => {
+    setTodos([...todos, text])
+    setText('');
   }
 
-  const changeTitle = () => {
-    setTitle('something else');
+  const handleDeleteTodo = (todoText) => {
+    setTodos(todos.filter(todo => todo !== todoText))
   }
 
   return (
     <div>
-      <h1>{title}</h1>
-      <button onClick={changeTitle}>Change</button>
-      <Test myPropOne="hello" myPropTwo={randomFunction} />
+      <input value={text} onChange={handleInputChange} />
+      <button onClick={addTodoItem}>Add</button>
+      <ul>
+        {todos.map((todo, index) => <li onClick={() => handleDeleteTodo(todo)} key={index}>{todo}</li>)}
+      </ul>
     </div>
   );
 }
